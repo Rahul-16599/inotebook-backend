@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchuser");
 
-const JWT_SECRET = "rhaulisgood$boy";
+const JWT_SECRET = "secretKey";
 
 // ROUTE 1 : Create a User using: POST "api/auth/createuser" no login required
 router.post(
@@ -50,7 +50,7 @@ router.post(
       res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Occoured");
+      res.status(500).send("Internal Server error Occoured");
     }
 
     // .then(user => res.json(user))
@@ -65,7 +65,7 @@ router.post(
 
 
 
-//ROUTE 1 :  authenticate a User using: POST "api/auth/login" no login required
+//ROUTE 2 :  authenticate a User using: POST "api/auth/login" no login required
 router.post(
   "/login",
 
@@ -101,7 +101,7 @@ router.post(
       res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Occoured");
+      res.status(500).send("Internal Server error Occoured");
     }
   }
 );
@@ -113,7 +113,7 @@ router.post(
 router.post("/getuser", fetchuser, async (req, res) => {
 try{
     userId = req.user.id;
-   const user = await User.findById(userId).select('-password')
+   const user = await User.findById(userId).select("-password")
    res.send(user)
 }catch (error) {
       console.error(error.message);
